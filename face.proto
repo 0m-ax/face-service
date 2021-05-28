@@ -1,0 +1,27 @@
+
+syntax = "proto3";
+
+package face;
+
+service FaceMatch {
+  rpc detect (Image) returns (Descriptor) {}
+  rpc matchDescriptors (Descriptors) returns (Match) {}
+  rpc matchDescriptorToImage (DescriptorAndImage) returns (Match) {}
+}
+message Descriptors {
+    Descriptor a = 1;
+    Descriptor b = 2;
+}
+message DescriptorAndImage {
+    Image image = 1;
+    Descriptor descriptor = 2;
+}
+message Image {
+    bytes data = 1;
+}
+message Descriptor {
+    repeated float points = 1;
+}
+message Match {
+    float distance = 1;
+}
